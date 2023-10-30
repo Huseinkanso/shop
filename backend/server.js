@@ -28,27 +28,6 @@ app.listen(port,()=>{
 const __dirname = path.resolve()
 app.use('/uploads',express.static(path.join(__dirname,'/uploads')))
 
-// if(process.env.NODE_ENV==='production'){
-//     // set static folder
-//     app.use(express.static(path.join(__dirname,'/frontend/dist')))
-
-//     // any route that is not api route
-//     app.get('*',(req,res)=>{
-//         res.sendFile(path.resolve(__dirname,'frontend','dist','index.html'))
-//     })
-// }else 
-// {
-//     app.get('/',(req,res)=>{
-//         res.send('API is running')
-//     })
-// }
-
-
-if(process.env.NODE_ENV==='production'){
-    // set static folder
-    app.use(express.static(path.join(__dirname,'/frontend/dist')))
-}
-
 app.use('/api/products',productRoutes)
 app.use('/api/users',userRoute)
 app.use('/api/orders',orderRoutes)
@@ -56,6 +35,9 @@ app.use('/api/upload',uploadRoutes)
 app.use(notFound,errorHandler)
 
 if(process.env.NODE_ENV==='production'){
+
+    app.use(express.static(path.join(__dirname,'/frontend/dist')))
+
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'frontend','dist','index.html'))
     })
