@@ -7,12 +7,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: import.meta.env.BACKEND_URL || process.env.BACKEND_URL,
+        target: import.meta.env.VITE_BACKEND_URL ,
         changeOrigin: true,
         secure: false,
       },
       '/uploads': {
-        target: import.meta.env.BACKEND_URL || process.env.BACKEND_URL,
+        target: import.meta.env.VITE_BACKEND_URL ,
         changeOrigin: true,
       },
     },
