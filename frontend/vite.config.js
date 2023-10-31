@@ -9,12 +9,12 @@ export default ({mode})=>{
     server: {
       proxy: {
         "/api": {
-          target: process.env.VITE_API_URL,
+          target: 'https://electro-shop-1xjm.onrender.com',
           changeOrigin: true,
           secure: false,
         },
         '/uploads': {
-          target: process.env.VITE_API_URL ,
+          target: 'https://electro-shop-1xjm.onrender.com' ,
           changeOrigin: true,
         },
       },
