@@ -17,6 +17,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
     });
+    return;
   }
   throw new Error("Invalid Email or Password");
 });
@@ -30,6 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
+    return;
   }
   const user = await User.create({
     name,
@@ -70,7 +72,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
     });
-  } else throw new Error("user not found");
+    return;
+  }
+  throw new Error("user not found");
 });
 
 // update user profile
@@ -91,7 +95,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
     });
-  } else throw new Error({ message: "user not found" });
+    return;
+  }
+  throw new Error({ message: "user not found" });
 });
 
 // get users
@@ -106,13 +112,13 @@ const getUsers = asyncHandler(async (req, res) => {
 // route get  /api/users/:id
 // access private/admin
 const getUserById = asyncHandler(async (req, res) => {
-  const user=await User.findById(req.params.id).select('-password')
-  if(user){
-    res.status(200).json(user)
-  }else{
-    res.status(404)
-    throw new Error('user not found')
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.status(200).json(user);
+    return;
   }
+  res.status(404);
+  throw new Error("user not found");
 });
 
 // delete user
@@ -121,16 +127,17 @@ const getUserById = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
-    if(user.isAdmin){
-      res.status(400)
-      throw new Error('cannot delete admin user')
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("cannot delete admin user");
+      return;
     }
-    await user.deleteOne({_id:user._id});
+    await user.deleteOne({ _id: user._id });
     res.status(200).json({ message: "user removed" });
-  } else {
-    res.status(404);
-    throw new Error("user not found");
+    return;
   }
+  res.status(404);
+  throw new Error("user not found");
 });
 
 // update user
@@ -150,7 +157,9 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
     });
-  } else throw new Error("user not found");
+    return;
+  }
+  throw new Error("user not found");
 });
 
 export {

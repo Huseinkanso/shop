@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { savePaymentMethod } from '../slices/cartSlice'
 import {FormContainer,CheckoutSteps}  from "../components"
 const PaymentScreen = () => {
-    const [paymentMethod, setPaymentMethod] = useState('PayPal')
+    const [paymentMethod, setPaymentMethod] = useState('Stripe')
     const dispatch = useDispatch()
     const navigate=useNavigate()
     const {shippingAddress}=useSelector(state=>state.cart)
@@ -28,7 +28,7 @@ const PaymentScreen = () => {
             <Form.Group>
                 <Form.Label as='legend'>Select Method</Form.Label>
                 <Col> 
-                    <Form.Check
+                    {/* <Form.Check
                         type='radio'
                         label='PayPal or Credit Card'
                         id='PayPal'
@@ -36,7 +36,7 @@ const PaymentScreen = () => {
                         value='PayPal'
                         checked
                         onChange={(e) => setPaymentMethod(e.target.value)}
-                    ></Form.Check>
+                    ></Form.Check> */}
                     <Form.Check
                         type='radio'
                         label='Stripe'
