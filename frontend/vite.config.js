@@ -10,12 +10,12 @@ export default ({mode})=>{
       proxy: {
         "/api": {
           target: 'https://electro-shop-1xjm.onrender.com',
-          changeOrigin: true,
+          changeOrigin: false,
           secure: false,
         },
         '/uploads': {
           target: 'https://electro-shop-1xjm.onrender.com' ,
-          changeOrigin: true,
+          changeOrigin: false,
         },
       },
     },
