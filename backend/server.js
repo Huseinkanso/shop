@@ -28,14 +28,8 @@ app.listen(port,()=>{
 const __dirname = path.resolve()
 app.use('/uploads',express.static(path.join(__dirname,'/uploads')))
 
-app.use('/api/products',productRoutes)
-app.use('/api/users',userRoute)
-app.use('/api/orders',orderRoutes)
-app.use('/api/upload',uploadRoutes)
-app.use(notFound,errorHandler)
-
 if(process.env.NODE_ENV==='production'){
-
+    console.log(process.env.NODE_ENV);
     app.use(express.static(path.join(__dirname,'/frontend/dist')))
 
     app.get('*',(req,res)=>{
@@ -47,3 +41,11 @@ if(process.env.NODE_ENV==='production'){
         res.send('API is running')
     })
 }
+
+
+app.use('/api/products',productRoutes)
+app.use('/api/users',userRoute)
+app.use('/api/orders',orderRoutes)
+app.use('/api/upload',uploadRoutes)
+app.use(notFound,errorHandler)
+
