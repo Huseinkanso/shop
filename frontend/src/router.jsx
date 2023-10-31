@@ -61,7 +61,7 @@ const router = createBrowserRouter(
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Route>
 
-      <Route path="*" element={<h1>Not Found</h1>} />
+      {/* <Route path="*" element={<h1>Not Found</h1>} /> */}
     </Route>
   )
 );
