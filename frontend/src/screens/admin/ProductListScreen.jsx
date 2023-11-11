@@ -60,7 +60,7 @@ const ProductListScreen = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.products.length!==0 && data.products?.map((product)=>(
+                    {data?.products?.length!==0 && data.products.map((product)=>(
                         <tr key={product._id}>
                             <td>{product._id}</td>
                             <td>{product.name}</td>

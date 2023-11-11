@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 
 const UserListScreen = () => {
-  const { data: users, isLoading,refetch, error } = useGetUsersQuery();
+  const { data, isLoading,refetch, error } = useGetUsersQuery();
   const [deleteUser, { isLoading:loadingDelete }] = useDeleteUserMutation();
   const deleteUserHandler =async (id) => {
     if (window.confirm("Are you sure?")) {
@@ -41,7 +41,7 @@ const UserListScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user) => (
+            {data && data.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>

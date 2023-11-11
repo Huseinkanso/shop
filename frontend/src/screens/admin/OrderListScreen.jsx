@@ -4,7 +4,7 @@ import { FaTimes } from "react-icons/fa"
 import {Message,Loader}  from "../../components"
 import { useGetOrdersQuery } from "../../slices/ordersApiSlice"
 const OrderListScreen = () => {
-  const {data:orders,isLoading,error}=useGetOrdersQuery()
+  const {data,isLoading,error}=useGetOrdersQuery()
   return (
     <Container>
       <h1>Orders</h1>
@@ -21,7 +21,7 @@ const OrderListScreen = () => {
             </tr>
           </thead>
           <tbody>
-          {orders?.map((order)=>(
+          {data && data.map((order)=>(
             <tr key={order._id}>
               <td>{order._id}</td>
               <td>{order.user && order.user.name}</td>
